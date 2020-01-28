@@ -47,8 +47,9 @@ ln -s /var/www/flask_app/flask_app_nginx.conf /etc/nginx/conf.d/
 
 # Create uWSGI service and enable it
 cp uwsgi.service /etc/systemd/system/uwsgi.service
-systemctl enable uwsgi.service
+cp uwsgi.conf /etc/init/uwsgi.conf
 systemctl start uwsgi.service
+systemctl enable uwsgi.service
 
 # Install RPI GPIO libraries
 pip3 install rpi.gpio
