@@ -11,8 +11,7 @@ fi
 apt-get update -y 
 
 # Install dependencies
-apt-get install build-essential libncurses5-dev libncursesw5-dev libreadline6-dev libffi-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libsqlite3-dev libgdbm-dev tk8.5-dev libssl-dev openssl python-pip -y
-python3 -m pip install --upgrade pip setuptools wheel
+apt-get install build-essential libncurses5-dev libncursesw5-dev libreadline6-dev libffi-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libsqlite3-dev libgdbm-dev tk8.5-dev libssl-dev openssl python3-pip -y
 
 # Install nGINx web server
 apt-get install nginx -y
@@ -44,7 +43,7 @@ sqlite3 database.db < create_tables.sql
 
 # Update nginx config files
 rm -f /etc/nginx/sites-enabled/default
-ln -s flask_app_nginx.conf /etc/nginx/conf.d/
+ln -s /var/www/flask_app/flask_app_nginx.conf /etc/nginx/conf.d/
 
 # Create uWSGI service and enable it
 cp uwsgi.service /etc/systemd/system/uwsgi.service
