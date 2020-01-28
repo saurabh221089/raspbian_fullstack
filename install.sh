@@ -16,11 +16,11 @@ apt-get install build-essential libncurses5-dev libncursesw5-dev libreadline6-de
 # Install nGINx web server
 apt-get install nginx -y
 
-# Install Flask app framework
-pip3 install flask
-
 # Install Sqlite DB
 apt-get install sqlite3 -y
+
+# Install Flask app framework
+pip3 install flask
 
 # Install uWSGI app server
 pip3 install uwsgi
@@ -32,8 +32,8 @@ chown -R www-data:www-data /var/www/flask_app/
 cd /var/www/flask_app/
 
 # Create socket file for uwsgi and chmod to 666
-touch flask_app_uwsgi.sock
-chmod 666 flask_app_uwsgi.sock
+# touch flask_app_uwsgi.sock
+# chmod 666 flask_app_uwsgi.sock
 
 # Create directory for uwsgi logs
 mkdir -p /var/log/uwsgi
@@ -47,7 +47,7 @@ ln -s /var/www/flask_app/flask_app_nginx.conf /etc/nginx/conf.d/
 
 # Create uWSGI service and enable it
 cp uwsgi.service /etc/systemd/system/uwsgi.service
-cp uwsgi.conf /etc/init/uwsgi.conf
+#cp uwsgi.conf /etc/init/uwsgi.conf
 systemctl start uwsgi.service
 systemctl enable uwsgi.service
 
@@ -59,8 +59,7 @@ git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT/
 python3 setup.py install
 
-# Restart nginx & uwsgi service
-systemctl restart uwsgi.service
+# Restart nginx service
 service nginx restart
 
 # Check exit code

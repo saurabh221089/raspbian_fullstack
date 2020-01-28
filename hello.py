@@ -13,9 +13,9 @@ def hello():
 def web():
     return render_template("web.html",message="Flask App!!")
 
-@obj.route("/lab_temp")
+@obj.route("/temp")
 def lab_temp():
-	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+	humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17,retries=3, delay_seconds=1)
 	if humidity is not None and temperature is not None:
 		return render_template("lab_temp.html",temp=temperature,hum=humidity)
 	else:
