@@ -1,0 +1,16 @@
+[Unit]
+Description=uWSGI Application Server
+After=syslog.target
+
+[Service]
+ExecStart=uwsgi --ini /var/www/flask_app/flask_app_uwsgi.ini
+# Requires systemd version 211 or newer
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
